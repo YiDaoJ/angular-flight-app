@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Flight } from '../model/flight';
 
+type NumberBooleanDict = { [key: number]: boolean };
+
 @Component({
   selector: 'app-flight-search',
   templateUrl: './flight-search.component.html',
@@ -12,6 +14,13 @@ export class FlightSearchComponent implements OnInit {
   to = 'Graz';
   flights: Array<Flight> = [];
   selectedFlight: Flight | null = null;
+
+  cart: NumberBooleanDict = {
+    3: true,
+    5: true,
+  };
+
+  // const inCart = this.cart[7]
 
   constructor(private http: HttpClient) {}
 
