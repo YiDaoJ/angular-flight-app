@@ -1,5 +1,5 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FlightService } from '../flight.service';
 import { Flight } from '../model/flight';
 
 type NumberBooleanDict = { [key: number]: boolean };
@@ -22,18 +22,12 @@ export class FlightSearchComponent implements OnInit {
 
   // const inCart = this.cart[7]
 
-  constructor(private http: HttpClient) {}
+  constructor(private flightService: FlightService) {}
 
   ngOnInit() {}
 
   search(): void {
-    const url = 'http://demo.ANGULARarchitects.io/api/flight';
-
-    const headers = new HttpHeaders().set('Accept', 'application/json');
-
-    const params = new HttpParams().set('from', this.from).set('to', this.to);
-
-    this.http.get<Flight[]>(url, { headers, params }).subscribe({
+    this.flightService.findFight(this.from, this.to).subscribe({
       next: (flights) => {
         this.flights = flights;
       },
