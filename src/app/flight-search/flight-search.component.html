@@ -1,0 +1,33 @@
+<h1>Flight Search</h1>
+
+<div class="form-group">
+  <label>From:</label>
+  <input class="form-control" name="from" [(ngModel)]="from" />
+</div>
+
+<div class="form-group">
+  <label>To:</label>
+  <input class="form-control" name="to" [(ngModel)]="to" />
+</div>
+
+<div  class="form-group">
+  <button class="btn btn-default" (click)="search()" [disabled]="!from || !to">
+    Search
+  </button>
+</div>
+
+<div class="row">
+  <div
+    *ngFor="let flight of flights"
+    class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+    <app-flight-card
+      [item]="flight"
+      [selected]="cart[flight.id]"
+      (handleChangeSelected)="cart[flight.id] = $event">
+      <!-- TODO: change selected & handleChangeSelected to Two-Way-Bindings -->
+    </app-flight-card>
+  </div>
+</div>
+
+<b>Cart</b>
+<pre>{{cart | json}}</pre>
